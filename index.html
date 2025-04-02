@@ -8,6 +8,9 @@
       async function  inicializar() {
         this.filtros = await new FiltroPaises();  
         this.filtros.addFiltro('Sudamerica', (e) => e.subregion ==='South America');
+        this.filtros.addFiltro('Superpoblados', (e) => e.population > 100000000);
+        this.filtros.addFiltro('Insulares', (e) => !e.borders);
+        this.filtros.addFiltro('De habla guaraní', (e) => e.languages && Object.values(e.languages).includes('Guaraní')); //verifica si el array de lenguajes de cada pais contiene el lenguaje guarani
         const selectElement = document.getElementById('paises-select');
         const filtrosDisponibles = this.filtros.getFiltros()
         filtrosDisponibles.forEach( f => selectElement.add(new Option(f.name, f.name)));
